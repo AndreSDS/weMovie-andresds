@@ -21,7 +21,7 @@ export const IconLoading = styled.img.attrs({
 
 export const LoagingContainer = styled.div`
     width: 100vw;
-    height: calc(100vh - 7,25rem);
+    height: calc(100vh - 7.25rem);
     display: flex;
     justify-content: center;
     align-items: center;
