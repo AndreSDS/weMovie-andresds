@@ -11,6 +11,7 @@ export const CartListContainer = styled.section`
 
   @media (max-width: 375px) {
     padding: 1rem;
+    min-height: calc(100vh - 4.25rem);
   }
 `;
 
@@ -20,6 +21,10 @@ export const CartListContent = styled.table`
   flex-direction: column;
   align-items: flex-start;
   gap: 1.3125rem;
+
+  @media (max-width: 375px) {
+    flex: 1;
+  }
 `;
 
 export const CartListHeader = styled.thead`
