@@ -8,7 +8,7 @@ export function Home() {
 
   async function fetchMovies() {
     if (movies.length === 0) {
-      const response = await fetch("http://localhost:3001/products");
+      const response = await fetch("https://my-json-server.typicode.com/AndreSDS/fake-api/products");
       const data = await response.json();
       setMoviesList(data);
     }

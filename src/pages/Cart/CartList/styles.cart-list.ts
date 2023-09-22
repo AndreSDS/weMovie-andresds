@@ -75,12 +75,27 @@ export const CartListData = styled.td<{ $width?: string, $paddingRight?: string,
   justify-content: ${({ $justifyBetween }) => $justifyBetween ? "space-between" : "flex-start"};
   width: ${({ $width }) => $width || "100%"};
   padding-right: ${({ $paddingRight }) => $paddingRight || "0"};
+  gap: 0;
+
+  a {
+    color: #000;
+    font-size: 14px;
+    text-decoration: none;
+    
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 
   @media (max-width: 375px) {
     width: 100%;
     justify-content: flex-end;
     align-items: flex-start;
     gap: 2rem;
+
+    a {
+      display: none;
+    }
   }
 `;
 
@@ -102,5 +117,17 @@ export const CartTotalLabel = styled.span<{ $color: string, $fontSize: string, $
 
   @media (max-width: 375px) {
     line-height: 1.25rem;
+  }
+`;
+
+export const ButtonContainer = styled.div`
+  display: flex;
+  width: 100%;
+  max-width: 235px;
+  margin-right: 2rem;
+
+  @media (max-width: 375px) {
+    margin-right: 0;
+    max-width: 100%;
   }
 `;

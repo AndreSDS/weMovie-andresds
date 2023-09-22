@@ -1,4 +1,4 @@
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "../../../components";
 import { useCart } from "../../../hooks/useCart";
 import { CartItem } from "../CartItem/CartItem";
@@ -12,6 +12,7 @@ import {
   CartListData,
   CartListFooter,
   CartTotalLabel,
+  ButtonContainer
 } from "./styles.cart-list";
 
 export const CartList = () => {
@@ -46,11 +47,15 @@ export const CartList = () => {
 
         <CartListFooter>
           <CartListRow $displayFlex $flexDirection="row">
-            <CartListData $width="235px">
-              <Button
-                title="Finalizar Pedido"
-                onClick={checkout}
-              />
+            <CartListData style={{}}>
+              <ButtonContainer>
+                <Button
+                  title="Finalizar Pedido"
+                  onClick={checkout}
+                />
+              </ButtonContainer>
+
+              <Link to="/">continuar comprando</Link>
             </CartListData>
 
             <CartListData $justifyBetween $width="197px" $paddingRight="1.5rem">
