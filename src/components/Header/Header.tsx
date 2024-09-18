@@ -6,7 +6,7 @@ export const Header = () => {
   return (
     <HeaderContainer>
       <HeaderTitle>
-        <Link to="/">WeMovies</Link>
+        <Link to="/">Andre's Store</Link>
       </HeaderTitle>
 
       <ShopCart />

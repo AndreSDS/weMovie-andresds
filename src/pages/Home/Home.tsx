@@ -1,31 +1,31 @@
-import { useEffect } from "react";
-import { Loading, MoviesList } from "../../components";
-import { useMovies } from "../../hooks/useMovies";
+import { useEffect, useState } from "react";
+import { connect, iAmReady } from "@tiendanube/nexo/helpers";
+import nexo from "../../libs/nexoClient";
+import { Loading, ProductsList } from "../../components";
+import { useProducts } from "../../hooks/useProducts.ts";
 import { Container } from "../../layout";
+import NexoSyncRoute from "../../libs/nexosyncRoute.tsx";
 
 export function Home() {
-  const { movies, setMoviesList } = useMovies();
-
-  async function fetchMovies() {
-    if (movies.length === 0) {
-      const response = await fetch("http://localhost:3001/products");
-      const data = await response.json();
-      setMoviesList(data);
-    }
-  }
+  const [isConnect, setIsConnect] = useState(false);
+  const { products } = useProducts();
 
   useEffect(() => {
-    fetchMovies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    connect(nexo).then(async () => {
+      setIsConnect(true);
+      iAmReady(nexo);
+    });
   }, []);
 
-  if (movies.length === 0) {
+  if (isConnect || products.length === 0) {
     return <Loading />;
   }
 
   return (
-    <Container>
-      <MoviesList />
-    </Container>
+    <NexoSyncRoute>
+      <Container>
+        <ProductsList />
+      </Container>
+    </NexoSyncRoute>
   );
 }

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MovieCardContainer = styled.section`
+export const ProductCardContainer = styled.section`
     width: 100%;
     max-width: 19.3125rem;
     height: 19.0625rem;
@@ -17,7 +17,7 @@ export const MovieCardContainer = styled.section`
     }
 `;
 
-export const MovieCardContent = styled.div`
+export const ProductCardContent = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
@@ -26,16 +26,16 @@ export const MovieCardContent = styled.div`
     gap: 8px;
 `;
 
-export const MovieImage = styled.img`
+export const ProductCardImage = styled.img`
     width: 147px;
     height: 188px;
     background-color: #C4C4C4;
 `;
 
-export const MovieInfo = styled.div`
+export const ProductCardInfo = styled.div`
 `
 
-export const MovieTitle = styled.h2`
+export const ProductCardTitle = styled.h2`
     color: #333;
     text-align: center;
     font-size: 12px;
@@ -44,7 +44,7 @@ export const MovieTitle = styled.h2`
     margin: 0;
 `;
 
-export const MoviePrice = styled.p`
+export const ProductCardPrice = styled.p`
     color: #2F2E41;
     text-align: center;
     font-size: 16px;

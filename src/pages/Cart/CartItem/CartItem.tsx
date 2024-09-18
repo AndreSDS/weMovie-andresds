@@ -1,4 +1,4 @@
-import { CartMovie } from "../../../context/CartContext";
+import { CartProduct} from "../../../interfaces/ICartProduct.ts";
 import {
   CartItemContainer,
   CartItemImage,
@@ -13,38 +13,38 @@ import {
   InfoContent
 } from "./styles.cart-item";
 import increaseIcon from "../../../assets/increase-icon.svg";
-import decreseIcon from "../../../assets/decrease-icon.svg";
+import decreaseIcon from "../../../assets/decrease-icon.svg";
 import removeIcon from "../../../assets/remove-icon.svg";
 
 import { useCart } from "../../../hooks/useCart";
 import { currencyFormat } from "../../../helpers/currencyFormat";
 
 type CartItemProps = {
-  item: CartMovie;
+  item: CartProduct;
 };
 
 export const CartItem = ({ item }: CartItemProps) => {
   const { addToCart, decreaseQuantity, removeFromCart } = useCart();
-  const { movie, quantity } = item;
+  const { product, quantity } = item;
 
-  const subtotal = currencyFormat(movie.price * quantity);
+  const subtotal = currencyFormat(product.price * quantity);
 
   return (
     <CartItemContainer>
-      <CartItemImage src={movie.image} />
+      <CartItemImage src={product.image} />
       <InfoContent>
         <CartItemInfo>
-          <h3>{movie.title}</h3>
-          <p>{currencyFormat(movie.price)}</p>
+          <h3>{product.title}</h3>
+          <p>{currencyFormat(product.price)}</p>
         </CartItemInfo>
 
         <QuanityAndSubtotal>
           <CartItemQuantity>
-            <ItemQuantityButton onClick={() => decreaseQuantity(movie.id)}>
-              <Icon src={decreseIcon} />
+            <ItemQuantityButton onClick={() => decreaseQuantity(product.id)}>
+              <Icon src={decreaseIcon} />
             </ItemQuantityButton>
             <ItemQuantity>{quantity}</ItemQuantity>
-            <ItemQuantityButton onClick={() => addToCart(movie)}>
+            <ItemQuantityButton onClick={() => addToCart(product)}>
               <Icon src={increaseIcon} />
             </ItemQuantityButton>
           </CartItemQuantity>
@@ -56,7 +56,7 @@ export const CartItem = ({ item }: CartItemProps) => {
         </QuanityAndSubtotal>
       </InfoContent>
 
-      <CartItemAction onClick={() => removeFromCart(movie.id)}>
+      <CartItemAction onClick={() => removeFromCart(product.id)}>
         <Icon src={removeIcon} />
       </CartItemAction>
     </CartItemContainer>

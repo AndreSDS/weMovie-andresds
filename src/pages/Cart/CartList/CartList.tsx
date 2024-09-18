@@ -16,7 +16,7 @@ import {
 
 export const CartList = () => {
   const navigate = useNavigate();
-  const { cartMovies, getCartTotal, clearCart } = useCart();
+  const { cartProducts, getCartTotal, clearCart } = useCart();
 
   function checkout() {
     clearCart();
@@ -36,9 +36,9 @@ export const CartList = () => {
 
         <CartListBody>
           <CartListRow $displayFlex $height $flexDirection="column">
-            {cartMovies.map((cartMovie) => (
-              <CartListData key={cartMovie.movie.id}>
-                <CartItem item={cartMovie} />
+            {cartProducts.map((cartProduct) => (
+              <CartListData key={cartProduct.product.id}>
+                <CartItem item={cartProduct} />
               </CartListData>
             ))}
           </CartListRow>

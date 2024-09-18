@@ -2,10 +2,10 @@ import { useContext } from "react";
 import { CartContext } from "../context/CartContext";
 
 export const useCart = () => {
-    const { cartMovies, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, getCartTotal, getItemsQuantity, clearCart } = useContext(CartContext);
+    const { cartProducts, addToCart, removeFromCart, increaseQuantity, decreaseQuantity, getCartTotal, getItemsQuantity, clearCart } = useContext(CartContext);
 
     return {
-        cartMovies,
+        cartProducts,
         addToCart,
         removeFromCart,
         increaseQuantity,

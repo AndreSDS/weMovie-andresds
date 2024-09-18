@@ -1,98 +1,97 @@
 import { ReactNode, useState } from "react";
-import { Movie } from "../models/IMovie";
-import { CartContext, CartMovie } from "../context/CartContext";
+import { Product } from "../interfaces/IProduct.ts";
+import { CartProduct } from "../interfaces/ICartProduct.ts";
+import { CartContext } from "../context/CartContext";
 import { currencyFormat } from "../helpers/currencyFormat";
 
 export const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [cartMovies, setCartMovies] = useState<CartMovie[]>([]);
+  const [cartProducts, setCartProducts] = useState<CartProduct[]>([]);
 
-  function verifyMovieIsInCart(movieId: number): CartMovie | undefined {
+  function verifyMovieIsInCart(productId: number): CartProduct | undefined {
     return (
-      cartMovies.find((cartMovie) => cartMovie.movie.id === movieId) ||
+        cartProducts.find((carProduct) => carProduct.product.id === productId) ||
       undefined
     );
   }
 
-  function addToCart(movie: Movie) {
-    if (verifyMovieIsInCart(movie.id)) {
-      increaseQuantity(movie.id);
+  function addToCart(product: Product) {
+    if (verifyMovieIsInCart(product.id)) {
+      increaseQuantity(product.id);
       return;
     }
 
     const newCartMovie = {
-      movie,
+      product,
       quantity: 1,
-    } as CartMovie;
+    } as CartProduct;
 
-    setCartMovies([...cartMovies, newCartMovie]);
+    setCartProducts([...cartProducts, newCartMovie]);
   }
 
-  function removeFromCart(movieId: number) {
-    const newCartMovies = cartMovies.filter(
-      (cartMovie) => cartMovie.movie.id !== movieId
+  function removeFromCart(productId: number) {
+    const newCartProducts = cartProducts.filter(
+      (cartProduct) => cartProduct.product.id !== productId
     );
-    setCartMovies(newCartMovies);
+    setCartProducts(newCartProducts);
   }
 
-  function increaseQuantity(movieId: number) {
-    const newCartMovies = cartMovies.map((cartMovie) => {
-      if (cartMovie.movie.id === movieId) {
+  function increaseQuantity(productId: number) {
+    const newCartProducts = cartProducts.map((carProduct) => {
+      if (carProduct.product.id === productId) {
         return {
-          ...cartMovie,
-          quantity: cartMovie.quantity + 1,
+          ...carProduct,
+          quantity: carProduct.quantity + 1,
         };
       }
-      return cartMovie;
+      return carProduct;
     });
-    setCartMovies(newCartMovies);
+    setCartProducts(newCartProducts);
   }
 
-  function decreaseQuantity(movieId: number) {
-    const cartMovie = verifyMovieIsInCart(movieId);
-    if (!cartMovie) return;
+  function decreaseQuantity(productId: number) {
+    const cartProduct = verifyMovieIsInCart(productId);
+    if (!cartProduct) return;
 
-    if (cartMovie.quantity === 1) {
-      removeFromCart(movieId);
+    if (cartProduct.quantity === 1) {
+      removeFromCart(productId);
       return;
     }
 
-    const newCartMovies = cartMovies.map((cartMovie) => {
-      if (cartMovie.movie.id === movieId) {
+    const newCartProducts = cartProducts.map((cartProduct) => {
+      if (cartProduct.product.id === productId) {
         return {
-          ...cartMovie,
-          quantity: cartMovie.quantity - 1,
+          ...cartProduct,
+          quantity: cartProduct.quantity - 1,
         };
       }
-      return cartMovie;
+      return cartProduct;
     });
 
-    setCartMovies(newCartMovies);
+    setCartProducts(newCartProducts);
   }
 
   function getCartTotal() {
-    const total = cartMovies.reduce((acc, cartMovie) => {
-      return acc + cartMovie.movie.price * cartMovie.quantity;
+    const total = cartProducts.reduce((acc, cartProduct) => {
+      return acc + cartProduct.product.price * cartProduct.quantity;
     }, 0);
 
     return currencyFormat(total);
   }
 
   function getItemsQuantity() {
-    const quantity = cartMovies.reduce((acc, cartMovie) => {
-      return acc + cartMovie.quantity;
+    return cartProducts.reduce((acc, cartProduct) => {
+      return acc + cartProduct.quantity;
     }, 0);
-
-    return quantity;
   }
 
   function clearCart() {
-    setCartMovies([] as CartMovie[]);
+    setCartProducts([] as CartProduct[]);
   }
 
   return (
     <CartContext.Provider
       value={{
-        cartMovies,
+        cartProducts,
         addToCart,
         removeFromCart,
         increaseQuantity,

@@ -4,11 +4,11 @@ import { CartEmpty } from "./CartEmpty/CartEmpty";
 import { Container } from "../../layout";
 
 export function Cart() {
-  const { cartMovies } = useCart();
+  const { cartProducts } = useCart();
 
   return (
     <Container>
-      {cartMovies.length > 0 ? <CartList /> : <CartEmpty /> }
+      {cartProducts.length > 0 ? <CartList /> : <CartEmpty /> }
     </Container>
   );
 }

@@ -1,17 +1,13 @@
 import { createContext } from "react";
-import { Movie } from "../models/IMovie";
-
-export interface CartMovie {
-    movie: Movie;
-    quantity: number;
-}
+import { CartProduct } from "../interfaces/ICartProduct.ts";
+import { Product } from "../interfaces/IProduct.ts";
 
 interface CartContextData {
-    cartMovies: CartMovie[];
-    addToCart: (movie: Movie) => void;
-    removeFromCart: (movieId: number) => void;
-    increaseQuantity: (movieId: number) => void;
-    decreaseQuantity: (movieId: number) => void;
+    cartProducts: CartProduct[];
+    addToCart: (product: Product) => void;
+    removeFromCart: (productId: number) => void;
+    increaseQuantity: (product: number) => void;
+    decreaseQuantity: (product: number) => void;
     getCartTotal: () => string;
     getItemsQuantity: () => number;
     clearCart: () => void;

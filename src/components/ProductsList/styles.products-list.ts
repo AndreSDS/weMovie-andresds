@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const MoviesContainer = styled.section`
+export const ProductsContainer = styled.section`
    width: 100%;
     display: flex;
     flex-wrap: wrap;
